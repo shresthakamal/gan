@@ -10,9 +10,9 @@ for x in IMG_SHAPE:
     IMG_SIZE *= x
 
 
-class GAN(torch.nn.Module):
+class nnGAN(torch.nn.Module):
     def __init__(self):
-        super(GAN, self).__init__()
+        super(nnGAN, self).__init__()
 
         self.generator = nn.Sequential(
             nn.Linear(LATENT_DIM, 128),

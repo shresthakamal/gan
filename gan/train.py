@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torchvision import datasets, transforms
 
-from gan.model import GAN
+from gan.architecture.nn import nnGAN
 
 random_seed = 123
 generator_learning_rate = 0.001
@@ -20,7 +20,7 @@ for x in IMG_SHAPE:
     IMG_SIZE *= x
 
 
-def train():
+def train(start, device):
     # get the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -43,15 +43,13 @@ def train():
 
     torch.manual_seed(random_seed)
 
-    model = GAN()
+    model = nnGAN()
     model = model.to(device)
 
     optim_G = torch.optim.Adam(model.generator.parameters(), lr=generator_learning_rate)
     optim_D = torch.optim.Adam(
         model.discriminator.parameters(), lr=discriminator_learning_rate
     )
-
-    start = time.time()
 
     for epoch in range(NUM_EPOCHS):
         model = model.train()
@@ -125,32 +123,10 @@ def train():
     torch.save(model.state_dict(), "gan_nn_mnist.pth")
 
 
-def eval():
-    # load the device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    model = GAN()
-    # load the model
-    model.load_state_dict(torch.load("gan_nn_mnist.pth"))
-    model = model.to(device)
-
-    model.eval()
-
-    # generate images
-    z = torch.zeros(10, LATENT_DIM).uniform_(-1, 1).to(device)
-    generated_featuers = model.generator_forward(z)
-
-    imgs = generated_featuers.view(-1, 1, 28, 28).detach().cpu().numpy()
-
-    fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(20, 2.5))
-
-    for i, ax in enumerate(axes):
-        ax.imshow(imgs[i, 0], cmap="gray")
-        ax.axis("off")
-
-
 # python main block
 if __name__ == "__main__":
-    train()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    eval()
+    start = time.time()
+
+    train(start, device)
