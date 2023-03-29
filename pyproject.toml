@@ -1,21 +1,20 @@
 [tool.poetry]
-name = "gan"
+name = "standard-gan"
 version = "0.1.0"
 description = ""
 authors = ["kamal-shrestha <kamalandshrestha@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.9.6"
+tensorflow = "^2.12.0"
 torch = "^2.0.0"
-torchvision = "^0.15.1"
-numpy = "^1.24.2"
-notebook = "^6.5.3"
-tensorboard = "^2.12.0"
 matplotlib = "^3.7.1"
+loguru = "^0.6.0"
+torchvision = "^0.15.1"
+notebook = "^6.5.3"
+pre-commit = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
-pre-commit = "^3.2.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

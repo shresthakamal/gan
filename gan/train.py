@@ -7,6 +7,7 @@ from torch.utils.tensorboard import SummaryWriter
 from torchvision import datasets, transforms
 
 from gan.architecture.nn import nnGAN
+from gan.utils.logger import logger
 
 random_seed = 123
 generator_learning_rate = 0.001
@@ -20,9 +21,11 @@ for x in IMG_SHAPE:
     IMG_SIZE *= x
 
 
-def train(start, device):
+def train(start):
     # get the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    logger.info(f"Using: {device}")
 
     # initialize tensorboard writer
     writer = SummaryWriter(f"runs/GAN_MNIST/{time.time()}")
@@ -46,10 +49,15 @@ def train(start, device):
     model = nnGAN()
     model = model.to(device)
 
+    logger.info(f"Model: \n {model}")
+
     optim_G = torch.optim.Adam(model.generator.parameters(), lr=generator_learning_rate)
     optim_D = torch.optim.Adam(
         model.discriminator.parameters(), lr=discriminator_learning_rate
     )
+
+    g_losses = []
+    d_losses = []
 
     for epoch in range(NUM_EPOCHS):
         model = model.train()
@@ -94,6 +102,9 @@ def train(start, device):
             d_loss.backward()
             optim_D.step()
 
+            g_losses.append(g_loss)
+            d_losses.append(d_loss)
+
             # plot losses based on batch and epoch
             writer.add_scalars(
                 "Loss",
@@ -103,7 +114,7 @@ def train(start, device):
 
             ### LOGGING
             if not batch_idx % 100:
-                print(
+                logger.info(
                     "Epoch: %03d/%03d | Batch %03d/%03d | Gen/Dis Loss: %.4f/%.4f"
                     % (
                         epoch + 1,
@@ -115,18 +126,23 @@ def train(start, device):
                     )
                 )
 
-        print("Time elapsed: %.2f min" % ((time.time() - start) / 60))
+        logger.info("Time elapsed: %.2f min" % ((time.time() - start) / 60))
 
-    print("Total Training Time: %.2f min" % ((time.time() - start) / 60))
+    logger.info("Total Training Time: %.2f min" % ((time.time() - start) / 60))
 
     # save the model
     torch.save(model.state_dict(), "gan_nn_mnist.pth")
 
+    # plot the g_losses and d_losses in the same graph by detaching them from cuda
+    plt.plot(torch.tensor(g_losses).detach().cpu(), label="Generator Loss")
+    plt.plot(torch.tensor(d_losses).detach().cpu(), label="Discriminator Loss")
+
+    # save the plot
+    plt.savefig("losses.png")
+
 
 # python main block
 if __name__ == "__main__":
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     start = time.time()
 
-    train(start, device)
+    train(start)

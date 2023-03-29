@@ -88,12 +88,15 @@ six = "*"
 test = ["astroid", "pytest"]
 
 [[package]]
-name = "atomicwrites"
-version = "1.4.1"
-description = "Atomic file writes."
-category = "dev"
+name = "astunparse"
+version = "1.6.3"
+description = "An AST unparser for Python"
+category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.6.1,<2.0"
 
 [[package]]
 name = "attrs"
@@ -180,7 +183,7 @@ pycparser = "*"
 name = "cfgv"
 version = "3.3.1"
 description = "Validate configuration and produce human readable error messages."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.1"
 
@@ -281,7 +284,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "distlib"
 version = "0.3.6"
 description = "Distribution utilities"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -320,6 +323,14 @@ docs = ["furo (>=2022.12.7)", "sphinx-autodoc-typehints (>=1.22,!=1.23.4)", "sph
 testing = ["covdefaults (>=2.3)", "coverage (>=7.2.2)", "diff-cover (>=7.5)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)", "pytest (>=7.2.2)"]
 
 [[package]]
+name = "flatbuffers"
+version = "23.3.3"
+description = "The FlatBuffers serialization format for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "fonttools"
 version = "4.39.3"
 description = "Tools to manipulate font files"
@@ -348,6 +359,14 @@ description = "Validates fully-qualified domain names against RFC 1123, so that 
 category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0, !=3.1, !=3.2, !=3.3, !=3.4, <4"
+
+[[package]]
+name = "gast"
+version = "0.4.0"
+description = "Python AST that abstracts the underlying Python version"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "google-auth"
@@ -386,6 +405,17 @@ requests-oauthlib = ">=0.7.0"
 tool = ["click (>=6.0.0)"]
 
 [[package]]
+name = "google-pasta"
+version = "0.2.0"
+description = "pasta is an AST-based Python refactoring library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = "*"
+
+[[package]]
 name = "grpcio"
 version = "1.53.0"
 description = "HTTP/2-based RPC framework"
@@ -397,10 +427,21 @@ python-versions = ">=3.7"
 protobuf = ["grpcio-tools (>=1.53.0)"]
 
 [[package]]
+name = "h5py"
+version = "3.8.0"
+description = "Read and write HDF5 files from Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+numpy = ">=1.14.5"
+
+[[package]]
 name = "identify"
 version = "2.5.22"
 description = "File identification library for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -531,6 +572,34 @@ python-versions = ">=3.7"
 arrow = ">=0.15.0"
 
 [[package]]
+name = "jax"
+version = "0.4.7"
+description = "Differentiate, compile, and transform Numpy code."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+ml_dtypes = ">=0.0.3"
+numpy = ">=1.21"
+opt_einsum = "*"
+scipy = ">=1.7"
+
+[package.extras]
+australis = ["protobuf (>=3.13,<4)"]
+ci = ["jaxlib (==0.4.6)"]
+cpu = ["jaxlib (==0.4.7)"]
+cuda = ["jaxlib (==0.4.7+cuda11.cudnn86)"]
+cuda11_cudnn82 = ["jaxlib (==0.4.7+cuda11.cudnn82)"]
+cuda11_cudnn86 = ["jaxlib (==0.4.7+cuda11.cudnn86)"]
+cuda11_local = ["jaxlib (==0.4.7+cuda11.cudnn86)"]
+cuda11_pip = ["jaxlib (==0.4.7+cuda11.cudnn86)", "nvidia-cublas-cu11", "nvidia-cuda-nvcc-cu11", "nvidia-cuda-runtime-cu11", "nvidia-cudnn-cu11", "nvidia-cufft-cu11", "nvidia-cusolver-cu11", "nvidia-cusparse-cu11"]
+cuda12_local = ["jaxlib (==0.4.7+cuda12.cudnn88)"]
+cuda12_pip = ["jaxlib (==0.4.7+cuda12.cudnn88)", "nvidia-cublas-cu12", "nvidia-cuda-nvcc-cu12", "nvidia-cuda-runtime-cu12", "nvidia-cudnn-cu12", "nvidia-cufft-cu12", "nvidia-cusolver-cu12", "nvidia-cusparse-cu12"]
+minimum-jaxlib = ["jaxlib (==0.4.6)"]
+tpu = ["jaxlib (==0.4.7)", "libtpu-nightly (==0.1.dev20230327)", "requests"]
+
+[[package]]
 name = "jedi"
 version = "0.18.2"
 description = "An autocompletion tool for Python that can be used for text editors."
@@ -580,10 +649,8 @@ python-versions = ">=3.7"
 attrs = ">=17.4.0"
 fqdn = {version = "*", optional = true, markers = "extra == \"format-nongpl\""}
 idna = {version = "*", optional = true, markers = "extra == \"format-nongpl\""}
-importlib-resources = {version = ">=1.4.0", markers = "python_version < \"3.9\""}
 isoduration = {version = "*", optional = true, markers = "extra == \"format-nongpl\""}
 jsonpointer = {version = ">1.13", optional = true, markers = "extra == \"format-nongpl\""}
-pkgutil-resolve-name = {version = ">=1.3.10", markers = "python_version < \"3.9\""}
 pyrsistent = ">=0.14.0,<0.17.0 || >0.17.0,<0.17.1 || >0.17.1,<0.17.2 || >0.17.2"
 rfc3339-validator = {version = "*", optional = true, markers = "extra == \"format-nongpl\""}
 rfc3986-validator = {version = ">0.1.0", optional = true, markers = "extra == \"format-nongpl\""}
@@ -709,6 +776,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "keras"
+version = "2.12.0"
+description = "Deep learning for humans."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
 name = "kiwisolver"
 version = "1.4.4"
 description = "A fast implementation of the Cassowary constraint solver"
@@ -717,12 +792,35 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "libclang"
+version = "16.0.0"
+description = "Clang Python Bindings, mirrored from the official LLVM repo: https://github.com/llvm/llvm-project/tree/main/clang/bindings/python, to make the installation process easier."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "lit"
 version = "16.0.0"
 description = "A Software Testing Tool"
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "loguru"
+version = "0.6.0"
+description = "Python logging made (stupidly) simple"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+colorama = {version = ">=0.3.4", markers = "sys_platform == \"win32\""}
+win32-setctime = {version = ">=1.0.0", markers = "sys_platform == \"win32\""}
+
+[package.extras]
+dev = ["colorama (>=0.3.4)", "docutils (==0.16)", "flake8 (>=3.7.7)", "tox (>=3.9.0)", "pytest (>=4.6.2)", "pytest-cov (>=2.7.1)", "black (>=19.10b0)", "isort (>=5.1.1)", "Sphinx (>=4.1.1)", "sphinx-autobuild (>=0.7.1)", "sphinx-rtd-theme (>=0.4.3)"]
 
 [[package]]
 name = "markdown"
@@ -787,12 +885,21 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "more-itertools"
-version = "9.1.0"
-description = "More routines for operating on iterables, beyond itertools"
-category = "dev"
+name = "ml-dtypes"
+version = "0.0.4"
+description = ""
+category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[package.dependencies]
+numpy = [
+    {version = ">1.20", markers = "python_version <= \"3.9\""},
+    {version = ">=1.21.2", markers = "python_version > \"3.9\""},
+]
+
+[package.extras]
+dev = ["absl-py", "pytest", "pytest-xdist", "pylint (>=2.6.0)", "pyink"]
 
 [[package]]
 name = "mpmath"
@@ -939,7 +1046,7 @@ test = ["pytest (>=7.2)", "pytest-cov (>=4.0)", "codecov (>=2.1)"]
 name = "nodeenv"
 version = "1.7.0"
 description = "Node.js virtual environment builder"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*"
 
@@ -990,8 +1097,8 @@ test = ["pytest", "pytest-console-scripts", "pytest-tornasync"]
 
 [[package]]
 name = "numpy"
-version = "1.24.2"
-description = "Fundamental package for array computing in Python"
+version = "1.23.5"
+description = "NumPy is the fundamental package for array computing with Python."
 category = "main"
 optional = false
 python-versions = ">=3.8"
@@ -1098,6 +1205,21 @@ signals = ["blinker (>=1.4.0)"]
 signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
 
 [[package]]
+name = "opt-einsum"
+version = "3.3.0"
+description = "Optimizing numpys einsum function"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+numpy = ">=1.7"
+
+[package.extras]
+docs = ["sphinx (==1.2.3)", "sphinxcontrib-napoleon", "sphinx-rtd-theme", "numpydoc"]
+tests = ["pytest", "pytest-cov", "pytest-pep8"]
+
+[[package]]
 name = "packaging"
 version = "23.0"
 description = "Core utilities for Python packages"
@@ -1157,14 +1279,6 @@ docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
-name = "pkgutil-resolve-name"
-version = "1.3.10"
-description = "Resolve a name to an object."
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[[package]]
 name = "platformdirs"
 version = "3.2.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -1177,21 +1291,10 @@ docs = ["furo (>=2022.12.7)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest (>=7.2.2)"]
 
 [[package]]
-name = "pluggy"
-version = "0.13.1"
-description = "plugin and hook calling mechanisms for python"
-category = "dev"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-
-[package.extras]
-dev = ["pre-commit", "tox"]
-
-[[package]]
 name = "pre-commit"
 version = "3.2.1"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.8"
 
@@ -1263,14 +1366,6 @@ python-versions = "*"
 tests = ["pytest"]
 
 [[package]]
-name = "py"
-version = "1.11.0"
-description = "library with cross-python path, ini-parsing, io, code, log facilities"
-category = "dev"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-
-[[package]]
 name = "pyasn1"
 version = "0.4.8"
 description = "ASN.1 types and codecs"
@@ -1326,28 +1421,6 @@ description = "Persistent/Functional/Immutable data structures"
 category = "main"
 optional = false
 python-versions = ">=3.7"
-
-[[package]]
-name = "pytest"
-version = "5.4.3"
-description = "pytest: simple powerful testing with Python"
-category = "dev"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
-attrs = ">=17.4.0"
-colorama = {version = "*", markers = "sys_platform == \"win32\""}
-more-itertools = ">=4.0.0"
-packaging = "*"
-pluggy = ">=0.12,<1.0"
-py = ">=1.5.0"
-wcwidth = "*"
-
-[package.extras]
-checkqa-mypy = ["mypy (==v0.761)"]
-testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
 name = "python-dateutil"
@@ -1467,6 +1540,22 @@ python-versions = ">=3.6,<4"
 pyasn1 = ">=0.1.3"
 
 [[package]]
+name = "scipy"
+version = "1.10.1"
+description = "Fundamental algorithms for scientific computing in Python"
+category = "main"
+optional = false
+python-versions = "<3.12,>=3.8"
+
+[package.dependencies]
+numpy = ">=1.19.5,<1.27.0"
+
+[package.extras]
+test = ["pytest", "pytest-cov", "pytest-timeout", "pytest-xdist", "asv", "mpmath", "gmpy2", "threadpoolctl", "scikit-umfpack", "pooch"]
+doc = ["sphinx (!=4.1.0)", "pydata-sphinx-theme (==0.9.0)", "sphinx-design (>=0.2.0)", "matplotlib (>2)", "numpydoc"]
+dev = ["mypy", "typing-extensions", "pycodestyle", "flake8", "rich-click", "click", "doit (>=0.36.0)", "pydevtool"]
+
+[[package]]
 name = "send2trash"
 version = "1.8.0"
 description = "Send file to trash natively under Mac OS X, Windows and Linux."
@@ -1583,6 +1672,71 @@ description = "What-If Tool TensorBoard plugin."
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "tensorflow"
+version = "2.12.0"
+description = "TensorFlow is an open source machine learning framework for everyone."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+absl-py = ">=1.0.0"
+astunparse = ">=1.6.0"
+flatbuffers = ">=2.0"
+gast = ">=0.2.1,<=0.4.0"
+google-pasta = ">=0.1.1"
+grpcio = ">=1.24.3,<2.0"
+h5py = ">=2.9.0"
+jax = ">=0.3.15"
+keras = ">=2.12.0,<2.13"
+libclang = ">=13.0.0"
+numpy = ">=1.22,<1.24"
+opt-einsum = ">=2.3.2"
+packaging = "*"
+protobuf = ">=3.20.3,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+six = ">=1.12.0"
+tensorboard = ">=2.12,<2.13"
+tensorflow-estimator = ">=2.12.0,<2.13"
+tensorflow-io-gcs-filesystem = {version = ">=0.23.1", markers = "platform_machine != \"arm64\" or platform_system != \"Darwin\""}
+termcolor = ">=1.1.0"
+typing-extensions = ">=3.6.6"
+wrapt = ">=1.11.0,<1.15"
+
+[[package]]
+name = "tensorflow-estimator"
+version = "2.12.0"
+description = "TensorFlow Estimator."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "tensorflow-io-gcs-filesystem"
+version = "0.32.0"
+description = "TensorFlow IO"
+category = "main"
+optional = false
+python-versions = ">=3.7, <3.12"
+
+[package.extras]
+tensorflow = ["tensorflow (>=2.12.0,<2.13.0)"]
+tensorflow-aarch64 = ["tensorflow-aarch64 (>=2.12.0,<2.13.0)"]
+tensorflow-cpu = ["tensorflow-cpu (>=2.12.0,<2.13.0)"]
+tensorflow-gpu = ["tensorflow-gpu (>=2.12.0,<2.13.0)"]
+tensorflow-rocm = ["tensorflow-rocm (>=2.12.0,<2.13.0)"]
+
+[[package]]
+name = "termcolor"
+version = "2.2.0"
+description = "ANSI color formatting for output in terminal"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+tests = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "terminado"
@@ -1745,7 +1899,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 name = "virtualenv"
 version = "20.21.0"
 description = "Virtual Python Environment builder"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -1814,6 +1968,25 @@ MarkupSafe = ">=2.1.1"
 watchdog = ["watchdog"]
 
 [[package]]
+name = "win32-setctime"
+version = "1.1.0"
+description = "A small Python utility to set file creation time on Windows"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.extras]
+dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
+
+[[package]]
+name = "wrapt"
+version = "1.14.1"
+description = "Module for decorators, wrappers and monkey patching."
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+
+[[package]]
 name = "zipp"
 version = "3.15.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
@@ -1827,8 +2000,8 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.8"
-content-hash = "5dafae756cb331b3ba74433a060f1728973f15d07b8c3916129f54607d0b80de"
+python-versions = "3.9.6"
+content-hash = "afd373d2d28e1cb6da9152a449c269e857396f8a1b193875be85d2ad020588a9"
 
 [metadata.files]
 absl-py = []
@@ -1838,7 +2011,7 @@ argon2-cffi = []
 argon2-cffi-bindings = []
 arrow = []
 asttokens = []
-atomicwrites = []
+astunparse = []
 attrs = []
 backcall = []
 beautifulsoup4 = []
@@ -1860,11 +2033,15 @@ distlib = []
 executing = []
 fastjsonschema = []
 filelock = []
+flatbuffers = []
 fonttools = []
 fqdn = []
+gast = []
 google-auth = []
 google-auth-oauthlib = []
+google-pasta = []
 grpcio = []
+h5py = []
 identify = []
 idna = []
 importlib-metadata = []
@@ -1873,6 +2050,7 @@ ipykernel = []
 ipython = []
 ipython-genutils = []
 isoduration = []
+jax = []
 jedi = []
 jinja2 = []
 jsonpointer = []
@@ -1883,14 +2061,17 @@ jupyter-events = []
 jupyter-server = []
 jupyter-server-terminals = []
 jupyterlab-pygments = []
+keras = []
 kiwisolver = []
+libclang = []
 lit = []
+loguru = []
 markdown = []
 markupsafe = []
 matplotlib = []
 matplotlib-inline = []
 mistune = []
-more-itertools = []
+ml-dtypes = []
 mpmath = []
 nbclassic = []
 nbclient = []
@@ -1914,15 +2095,14 @@ nvidia-cusparse-cu11 = []
 nvidia-nccl-cu11 = []
 nvidia-nvtx-cu11 = []
 oauthlib = []
+opt-einsum = []
 packaging = []
 pandocfilters = []
 parso = []
 pexpect = []
 pickleshare = []
 pillow = []
-pkgutil-resolve-name = []
 platformdirs = []
-pluggy = []
 pre-commit = []
 prometheus-client = []
 prompt-toolkit = []
@@ -1930,14 +2110,12 @@ protobuf = []
 psutil = []
 ptyprocess = []
 pure-eval = []
-py = []
 pyasn1 = []
 pyasn1-modules = []
 pycparser = []
 pygments = []
 pyparsing = []
 pyrsistent = []
-pytest = []
 python-dateutil = []
 python-json-logger = []
 pywin32 = []
@@ -1949,6 +2127,7 @@ requests-oauthlib = []
 rfc3339-validator = []
 rfc3986-validator = []
 rsa = []
+scipy = []
 send2trash = []
 setuptools-scm = []
 six = []
@@ -1959,6 +2138,10 @@ sympy = []
 tensorboard = []
 tensorboard-data-server = []
 tensorboard-plugin-wit = []
+tensorflow = []
+tensorflow-estimator = []
+tensorflow-io-gcs-filesystem = []
+termcolor = []
 terminado = []
 tinycss2 = []
 tomli = []
@@ -1976,4 +2159,6 @@ webcolors = []
 webencodings = []
 websocket-client = []
 werkzeug = []
+win32-setctime = []
+wrapt = []
 zipp = []

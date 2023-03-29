@@ -3,3 +3,6 @@ train:
 
 predict:
 	python3 -m gan.predict
+
+tensorboard:
+	tensorboard --logdir=runs/
